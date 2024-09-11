@@ -1,0 +1,4 @@
+
+# dotnet excludes
+bin/
+obj/

@@ -1,8 +1,26 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Config;
+using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 
+var config = AzureAIConfigProvider.LoadConfig();
 
-using Config;
+var builder = Kernel.CreateBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentName: config.DeploymentName, endpoint: config.Endpoint, apiKey: config.Key);
 
-var config = AzureAIConfigProvider.Load();
+var kernel = builder.Build();
 
-Console.WriteLine($"Endpoint: {config.Endpoint}");
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+string? userInput;
+do
+{
+    Console.Write("User > ");
+    userInput = Console.ReadLine();
+
+    if (userInput != null && userInput != "quit")
+    {
+        var result = await chatCompletionService.GetChatMessageContentAsync(prompt: userInput);
+        Console.WriteLine($"Assistant> {result}");
+    }
+}
+while (userInput != "quit");

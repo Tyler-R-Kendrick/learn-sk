@@ -1,5 +1,6 @@
 ﻿#pragma warning disable SKEXP0110
 using Core.Utilities;
+using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -19,17 +20,18 @@ public class Program : BaseProgram
             ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
         };
 
-        var ticketAgent = new TicketAgent(httpClient)
+        var ticketAgent = new TicketAgent(new MlbService(httpClient))
         {
             Name = "TicketPurchasing",
             Instructions = 
                 """
                 You are a ticket agent focused on buy baseball tickets for a customer. 
                 You can get the teams schedule from the scheduling tool. 
-                Your goal is to review the schedule and select a single game from the list.
+                Your goal is to review the schedule and select a single game only from the list.
+                If asked to pick a new game select the next game available
                 """,
             Description = "Ticket purchesing agent",
-            Kernel = ticketAgentKernel,
+            Kernel = ticketAgentKernel.Build(),
             Arguments = new KernelArguments(openAIPromptExecutionSettings)
         };
 
@@ -46,7 +48,7 @@ public class Program : BaseProgram
                 If the customer can not attend responde back with the customer is busy select a new game.
                 """,
             Description = "Validate the customer schedule is open for that game.",
-            Kernel = validationAgentKernel,
+            Kernel = validationAgentKernel.Build(),
             Arguments = new KernelArguments(openAIPromptExecutionSettings)
         };
         

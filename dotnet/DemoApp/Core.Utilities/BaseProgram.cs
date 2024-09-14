@@ -7,7 +7,7 @@ namespace Core.Utilities
 {
     public class BaseProgram
     {
-        public static Kernel CreateKernelWithChatCompletion(ApplicationSettings applicationSettings)
+        public static IKernelBuilder CreateKernelWithChatCompletion(ApplicationSettings applicationSettings)
         {
             var builder = Kernel.CreateBuilder();
 
@@ -16,7 +16,7 @@ namespace Core.Utilities
                 applicationSettings.OpenAI.Endpoint,
                 applicationSettings.OpenAI.Key);
 
-            return builder.Build();
+            return builder;
         }
 
         public static ApplicationSettings GetApplicationSettings()

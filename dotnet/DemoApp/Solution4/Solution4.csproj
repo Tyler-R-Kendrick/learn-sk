@@ -13,4 +13,14 @@
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.19.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Utilities\Core.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

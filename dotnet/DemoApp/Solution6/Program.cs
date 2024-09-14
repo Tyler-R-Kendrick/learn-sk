@@ -4,7 +4,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution6;
 using Core.Utilities;
-using System;
+using Core.Utilities.Services;
 
 public class Program : BaseProgram
 {
@@ -19,7 +19,7 @@ public class Program : BaseProgram
             ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
         };
 
-        var ticketAgent = new TicketAgent(httpClient)
+        var ticketAgent = new TicketAgent(new MlbService(httpClient))
         {
             Name = "TicketPurchasing",
             Instructions =
@@ -30,7 +30,7 @@ public class Program : BaseProgram
                 If the user wants to purchase the ticket let them know they are all set and have a ticket for the game.
                 """,
             Description = "Ticket purchesing agent",
-            Kernel = ticketAgentKernel,
+            Kernel = ticketAgentKernel.Build(),
             Arguments = new KernelArguments(openAIPromptExecutionSettings)
         };
 

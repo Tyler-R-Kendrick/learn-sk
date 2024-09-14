@@ -15,9 +15,10 @@ public partial class CustomAgent : ChatHistoryKernelAgent
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         List<StreamingChatMessageContent> contents = [];
-        await foreach(var result in InvokeStreamingAsync(
-            history, arguments, kernel, cancellationToken))
+
+        await foreach(var result in InvokeStreamingAsync(history, arguments, kernel, cancellationToken))
             contents.Add(result);
+
         yield return new ChatMessageContent(AuthorRole.Assistant,
             contents.Aggregate("", (init, next) => init + next.ToString()));
     }
@@ -30,10 +31,12 @@ public partial class CustomAgent : ChatHistoryKernelAgent
     {
         kernel ??= Kernel;
         arguments ??= Arguments;
+
         ChatMessageContent[] chat = [GetInstructionMessage(), ..history];
+
         var prompt = string.Join(Environment.NewLine, chat.Select(x => x.ToString()));
-        await foreach(var result in kernel.InvokePromptStreamingAsync(
-            prompt, arguments, cancellationToken: cancellationToken))
+
+        await foreach(var result in kernel.InvokePromptStreamingAsync(prompt, arguments, cancellationToken: cancellationToken))
             yield return new StreamingChatMessageContent(AuthorRole.Assistant, result.ToString());
     }
 

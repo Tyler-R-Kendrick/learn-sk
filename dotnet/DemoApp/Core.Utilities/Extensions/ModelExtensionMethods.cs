@@ -1,4 +1,4 @@
-﻿using Solution7.Models;
+﻿using Core.Utilities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Solution7.Utils
+namespace Core.Utilities.Extensions
 {
     public static class ModelExtensionMethods
     {

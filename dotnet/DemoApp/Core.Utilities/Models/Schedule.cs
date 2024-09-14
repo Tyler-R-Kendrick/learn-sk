@@ -1,4 +1,4 @@
-﻿namespace Solution7.Models
+﻿namespace Core.Utilities.Models
 {
     public record Schedule(List<GameDate> Dates);
 

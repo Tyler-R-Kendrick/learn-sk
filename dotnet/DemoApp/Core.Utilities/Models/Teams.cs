@@ -1,4 +1,4 @@
-﻿namespace Solution7.Models
+﻿namespace Core.Utilities.Models
 {
     public record MlbTeams(List<Team> Teams);
 

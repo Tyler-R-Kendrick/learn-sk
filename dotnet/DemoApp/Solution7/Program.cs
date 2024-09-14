@@ -1,15 +1,12 @@
 ﻿#pragma warning disable SKEXP0110
-using Microsoft.Extensions.Configuration;
+using Core.Utilities;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution7;
-using System;
-using System.Reflection;
-using System.Text.Json;
 
-public class Program
+public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
@@ -29,7 +26,7 @@ public class Program
                 """
                 You are a ticket agent focused on buy baseball tickets for a customer. 
                 You can get the teams schedule from the scheduling tool. 
-                Your goal is to review the schedule and select a game from the list.
+                Your goal is to review the schedule and select a single game from the list.
                 """,
             Description = "Ticket purchesing agent",
             Kernel = ticketAgentKernel,
@@ -77,28 +74,5 @@ public class Program
 
         Console.WriteLine("DONE");
         Console.ReadLine();
-    }
-
-    static Kernel CreateKernelWithChatCompletion(ApplicationSettings applicationSettings)
-    {
-
-        var builder = Kernel.CreateBuilder();
-
-        builder.AddAzureOpenAIChatCompletion(
-            applicationSettings.OpenAI.ModelName,
-            applicationSettings.OpenAI.Endpoint,
-            applicationSettings.OpenAI.Key);
-
-        return builder.Build();
-    }
-
-    static ApplicationSettings GetApplicationSettings()
-    {
-        IConfigurationRoot config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .AddUserSecrets(Assembly.GetExecutingAssembly())
-            .Build();
-
-        return config.GetSection("ApplicationSettings").Get<ApplicationSettings>();
     }
 }

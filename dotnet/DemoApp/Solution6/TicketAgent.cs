@@ -2,13 +2,17 @@
 #pragma warning disable SKEXP0001
 #pragma warning disable SKEXP0101
 using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Agents;
+using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 using System.ComponentModel;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
+using Core.Utilities.Agents;
 using Core.Utilities.Models;
 using Core.Utilities.Extensions;
-using Core.Utilities.Agents;
 
-namespace Solution7
+namespace Solution6
 {
     public class TicketAgent : BaseAgent
     {

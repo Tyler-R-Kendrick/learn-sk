@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>054ff368-9e4a-4a46-9b7d-dcadfaf31cd4</UserSecretsId>
+    <UserSecretsId>380c5f40-21e2-491c-8bbb-6797477d300c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,17 +14,14 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.19.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="1.19.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Agents.Abstractions" Version="1.19.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.19.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Core" Version="1.19.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Utilities\Core.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.SemanticKernel.Agents.Core">
-      <HintPath>..\..\..\..\..\..\NuGets\microsoft.semantickernel.agents.core\1.19.0-alpha\lib\net8.0\Microsoft.SemanticKernel.Agents.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

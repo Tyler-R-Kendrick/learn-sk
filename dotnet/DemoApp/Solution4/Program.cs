@@ -22,7 +22,7 @@ public class Program : BaseProgram
         kernelBuilder.Plugins.AddFromObject(mlbBaseballPlugin);
         Kernel kernel = kernelBuilder.Build();
 
-        Console.WriteLine(await kernel.InvokePromptAsync("Can you summarize the last Chicago Cubs game play by play.", new(settings)));
+        Console.WriteLine(await kernel.InvokePromptAsync("What happened in the last Chicago Cubs game.", new(settings)));
         Console.ReadLine();
     }
 }

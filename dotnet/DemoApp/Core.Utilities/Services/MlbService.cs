@@ -9,8 +9,8 @@ namespace Core.Utilities.Services
 
         public async Task<Schedule> GetTeamSchedule(int teamId, DateTime startDate, DateTime endDate)
         {
-            string startDateFormatted = DateTime.Now.AddDays(-1).ToString("yyy-MM-dd");
-            string endDateFormatted = DateTime.Now.AddDays(14).ToString("yyy-MM-dd");
+            string startDateFormatted = startDate.ToString("yyy-MM-dd");
+            string endDateFormatted = endDate.ToString("yyy-MM-dd");
             var requestUri = $"schedule?sportId=1&sportId=51&sportId=21&startDate={startDateFormatted}&endDate={endDateFormatted}&teamId={teamId}&timeZone=America/New_York&gameType=E&&gameType=S&&gameType=R&&gameType=F&&gameType=D&&gameType=L&&gameType=W&&gameType=A&&gameType=C&language=en&leagueId=104&&leagueId=103&&leagueId=160&&leagueId=590&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType";
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
             Schedule schedule = await response.Content.ReadFromJsonAsync<Schedule>();
@@ -27,9 +27,8 @@ namespace Core.Utilities.Services
             return mlbTeams;
         }
 
-        public async Task<List<Play>> GamePlayByPlay(int maxPlayByPlay)
+        public async Task<List<Play>> GamePlayByPlay(int gameId, int maxPlayByPlay)
         {
-            string gameId = "746097";
             string requestUri = $"game/{gameId}/playByPlay";
             HttpResponseMessage response = await _httpClient.GetAsync(requestUri);
             PlayByPlay playByPlay = await response.Content.ReadFromJsonAsync<PlayByPlay>();

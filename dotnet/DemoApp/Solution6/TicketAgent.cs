@@ -37,10 +37,21 @@ namespace Solution6
             return tabularData;
         }
 
-        [KernelFunction, Description("Gets the play by play for a specific game.")]
-        public async Task<string> GetGamePlayByPlay()
+        [KernelFunction, Description("Gets the teams last played game id.")]
+        public async Task<int> GetTeamsLastPlayedGameId(int teamId)
         {
-            string tabularData = (await _mlbService.GamePlayByPlay(40)).FormatPlayByPlayData();
+            var startDate = DateTime.Now.AddDays(-4);
+            var endDate = DateTime.Now.AddDays(-1);
+            var t = await _mlbService.GetTeamSchedule(teamId, startDate, endDate);
+            int gamePk = (await _mlbService.GetTeamSchedule(teamId, startDate, endDate)).Dates.Last().Games.Last().GamePk;
+
+            return gamePk;
+        }
+
+        [KernelFunction, Description("Gets the play by play for a specific game.")]
+        public async Task<string> GetGamePlayByPlay(int gameId)
+        {
+            string tabularData = (await _mlbService.GamePlayByPlay(gameId, 40)).FormatPlayByPlayData();
             return tabularData;
         }
     }

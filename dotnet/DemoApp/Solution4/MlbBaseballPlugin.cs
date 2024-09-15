@@ -24,6 +24,13 @@ namespace Solution4
             string tabularData = (await _mlbService.GetTeams()).FormatTeamData();
             return tabularData;
         }
+
+        [KernelFunction, Description("Gets the play by play for a specific game.")]
+        public async Task<string> GetGamePlayByPlay()
+        {
+            string tabularData = (await _mlbService.GamePlayByPlay(40)).FormatPlayByPlayData();
+            return tabularData;
+        }
     }
 }
 

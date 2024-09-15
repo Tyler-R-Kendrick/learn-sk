@@ -13,12 +13,16 @@ public class Program : BaseProgram
         IKernelBuilder kernelBuilder = CreateKernelWithChatCompletion(applicationSettings);
         HttpClient httpClient = new () { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
         MlbBaseballPlugin mlbBaseballPlugin = new (new MlbService(httpClient));
-        OpenAIPromptExecutionSettings settings = new() { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
+        OpenAIPromptExecutionSettings settings = new() 
+        { 
+            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+            ChatSystemPrompt = "You are a sports announcer. Summarize the game play-by-play as if you were the famous Cubs announcer Harry Caray."
+        };
 
         kernelBuilder.Plugins.AddFromObject(mlbBaseballPlugin);
         Kernel kernel = kernelBuilder.Build();
 
-        Console.WriteLine(await kernel.InvokePromptAsync("Whats the schedule for the Chicago Cubs.", new(settings)));
+        Console.WriteLine(await kernel.InvokePromptAsync("Can you summarize the last Chicago Cubs game play by play.", new(settings)));
         Console.ReadLine();
     }
 }

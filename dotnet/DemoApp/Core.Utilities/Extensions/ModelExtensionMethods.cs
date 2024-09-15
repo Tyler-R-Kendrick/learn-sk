@@ -1,6 +1,7 @@
 ﻿using Core.Utilities.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -38,6 +39,24 @@ namespace Core.Utilities.Extensions
             foreach (Team team in teams.Teams)
             {
                 stringBuilder.AppendLine($"| {team.Id} | {team.Name} |");
+
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        public static string FormatPlayByPlayData(this List<Play> plays)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            int counter = 0;
+
+            stringBuilder.AppendLine("| Play Number | Play Result |");
+            stringBuilder.AppendLine("| ----- | ----- |");
+
+            foreach (Play play in plays)
+            {
+                counter++;
+                stringBuilder.AppendLine($"| {counter} | {play.Result.Description} |");
 
             }
 

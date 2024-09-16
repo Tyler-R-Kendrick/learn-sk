@@ -5,12 +5,13 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution6;
 using Core.Utilities;
 using Core.Utilities.Services;
+using Core.Utilities.Config;
 
 public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        var applicationSettings = GetApplicationSettings();
+        var applicationSettings = AISettingsProvider.GetSettings();
         var ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         var validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };

@@ -7,7 +7,7 @@ namespace Core.Utilities
 {
     public class BaseProgram
     {
-        public static IKernelBuilder CreateKernelWithChatCompletion(ApplicationSettings applicationSettings)
+        public static IKernelBuilder CreateKernelWithChatCompletion(AISettings applicationSettings)
         {
             var builder = Kernel.CreateBuilder();
 
@@ -19,14 +19,5 @@ namespace Core.Utilities
             return builder;
         }
 
-        public static ApplicationSettings GetApplicationSettings()
-        {
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddUserSecrets(Assembly.GetExecutingAssembly())
-                .Build();
-
-            return config.GetSection("ApplicationSettings").Get<ApplicationSettings>();
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Core.Utilities.Models
 {
-    public record ApplicationSettings(
+    public record AISettings(
         OpenAI OpenAI
     );
 

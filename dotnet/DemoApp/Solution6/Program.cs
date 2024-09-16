@@ -6,21 +6,22 @@ using Solution6;
 using Core.Utilities;
 using Core.Utilities.Services;
 using Core.Utilities.Config;
+using Core.Utilities.Models;
 
 public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        var applicationSettings = AISettingsProvider.GetSettings();
-        var ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
-        var validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
-        var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
-        var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
+        AISettings applicationSettings = AISettingsProvider.GetSettings();
+        IKernelBuilder ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
+        IKernelBuilder validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
+        HttpClient httpClient = new();
+        OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
         {
             ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
         };
 
-        var ticketAgent = new TicketAgent(new MlbService(httpClient))
+        TicketAgent ticketAgent = new(new MlbService(httpClient))
         {
             Name = "TicketPurchasing",
             Instructions =
@@ -35,7 +36,7 @@ public class Program : BaseProgram
             Arguments = new KernelArguments(openAIPromptExecutionSettings)
         };
 
-        ChatHistory chatMessageContents = new ChatHistory();
+        ChatHistory chatMessageContents = new();
         chatMessageContents.AddUserMessage("Are there any games coming up for the Chicago Cubs game.");
 
         await foreach (ChatMessageContent response in ticketAgent.InvokeAsync(chatMessageContents))

@@ -13,9 +13,9 @@ namespace Solution7
         public async Task<string> GetExecutivesScheduleData()
         {
             var random = new Random();
-            var next = random.Next(1, 3);
+            var next = random.Next(1, 4);
 
-            if (next == 1)
+            if (next != 1)
             {
                 return "Schedule is full for this day";
             }

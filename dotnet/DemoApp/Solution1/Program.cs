@@ -1,7 +1,6 @@
 ﻿using Core.Utilities.Config;
 using Core.Utilities.Models;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
 
 AISettings applicationSettings = AISettingsProvider.GetSettings();
 
@@ -13,8 +12,6 @@ var builder = Kernel.CreateBuilder()
 
 var kernel = builder.Build();
 
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-
 string? userInput;
 do
 {
@@ -24,7 +21,7 @@ do
     if (userInput != null && userInput != "quit")
     {
         Console.Write("Assistant> ");
-        await foreach (var response in chatCompletionService.GetStreamingChatMessageContentsAsync(userInput))
+        await foreach (var response in kernel.InvokePromptStreamingAsync(userInput))
         {
             Console.Write(response);
         }

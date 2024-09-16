@@ -11,8 +11,8 @@ public class Program : BaseProgram
     {
         ApplicationSettings applicationSettings = GetApplicationSettings();
         IKernelBuilder kernelBuilder = CreateKernelWithChatCompletion(applicationSettings);
-        HttpClient httpClient = new () { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
-        MlbBaseballPlugin mlbBaseballPlugin = new (new MlbService(httpClient));
+        HttpClient httpClient = new ();
+        MlbBaseballData mlbBaseballPlugin = new(new MlbService(httpClient));
         OpenAIPromptExecutionSettings settings = new() 
         { 
             ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,

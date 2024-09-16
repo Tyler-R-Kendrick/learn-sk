@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SemanticKernel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace DemoApp
     //this is the next lesson around agent
     public class KernelConsumer
     {
-        public KernelConsumer(KernelBuilder kernelBuild)
+        public KernelConsumer(IKernelBuilder kernelBuild)
         {
         }
     }

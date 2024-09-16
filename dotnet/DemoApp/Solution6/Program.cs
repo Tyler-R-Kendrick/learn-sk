@@ -5,13 +5,14 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution6;
 using Core.Utilities;
 using Core.Utilities.Services;
+using Core.Utilities.Config;
 using Core.Utilities.Models;
 
 public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        ApplicationSettings applicationSettings = GetApplicationSettings();
+        AISettings applicationSettings = AISettingsProvider.GetSettings();
         IKernelBuilder ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         IKernelBuilder validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         HttpClient httpClient = new();

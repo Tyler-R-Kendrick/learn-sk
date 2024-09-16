@@ -1,5 +1,6 @@
 ﻿#pragma warning disable SKEXP0110
 using Core.Utilities;
+using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
@@ -11,7 +12,7 @@ public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        var applicationSettings = GetApplicationSettings();
+        var applicationSettings = AISettingsProvider.GetSettings();
         var ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         var validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
         var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };

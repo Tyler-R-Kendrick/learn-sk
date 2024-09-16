@@ -2,8 +2,8 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
-var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
-var kernel = builder.Build();
+IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+Kernel kernel = builder.Build();
 
 const string terminationPhrase = "quit";
 string? userInput;
@@ -12,12 +12,12 @@ do
   Console.Write("User > ");
   userInput = Console.ReadLine();
 
-  var promptExecutionSettings = new OpenAIPromptExecutionSettings
+  OpenAIPromptExecutionSettings promptExecutionSettings = new()
   {
     ChatSystemPrompt = "You are a baseball announcer, and every time you give advice you give your advice in baseball metaphors."
   };
 
-  var kernelArgs = new KernelArguments(promptExecutionSettings);
+  KernelArguments kernelArgs = new(promptExecutionSettings);
 
   if (userInput != null && userInput != terminationPhrase)
   {

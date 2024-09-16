@@ -3,7 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution4", "Solution4\Solution4.csproj", "{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution4", "Solution4\Solution4.csproj", "{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp", "DemoApp\DemoApp.csproj", "{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF9AF3BD-53DD-4710-968F-0ADE9E0F4536}"
@@ -11,13 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filters", "Filters\Filters.csproj", "{D9C34B34-76B2-496E-98D9-C6C24C69A6B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Filters", "Filters\Filters.csproj", "{D9C34B34-76B2-496E-98D9-C6C24C69A6B4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agents", "Agents\Agents.csproj", "{76AEB8F9-8593-4DD8-918F-999B50C2682C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Config", "Config\Config.csproj", "{6EDE1C2E-FF37-4A8F-B68B-FEDB38894405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution1", "Solution1\Solution1.csproj", "{3E5AC4CD-4008-4BFF-8C36-BBE537A66F6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution1", "Solution1\Solution1.csproj", "{3E5AC4CD-4008-4BFF-8C36-BBE537A66F6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,7 +26,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-<<<<<<< Updated upstream
+		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Release|Any CPU.ActiveCfg = Release|Any CPU

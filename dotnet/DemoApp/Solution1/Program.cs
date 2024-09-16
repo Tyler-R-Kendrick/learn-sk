@@ -5,13 +5,15 @@ using Microsoft.SemanticKernel;
 var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
 var kernel = builder.Build();
 
+// Execute program.
+const string terminationPhrase = "quit";
 string? userInput;
 do
 {
     Console.Write("User > ");
     userInput = Console.ReadLine();
 
-    if (userInput != null && userInput != "quit")
+    if (userInput != null && userInput != terminationPhrase)
     {
         Console.Write("Assistant> ");
         await foreach (var response in kernel.InvokePromptStreamingAsync(userInput))
@@ -21,4 +23,4 @@ do
         Console.WriteLine();
     }
 }
-while (userInput != "quit");
+while (userInput != terminationPhrase);

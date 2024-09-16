@@ -1,11 +1,7 @@
-﻿using Core.Utilities.Models;
+﻿using Ardalis.GuardClauses;
+using Core.Utilities.Models;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Utilities.Config
 {
@@ -18,8 +14,15 @@ namespace Core.Utilities.Config
                 .AddUserSecrets(Assembly.GetExecutingAssembly())
                 .Build();
 
-            return config.GetSection("ApplicationSettings").Get<AISettings>();
-        }
+            var aiSettings = config.GetSection("ApplicationSettings").Get<AISettings>();
 
+            Guard.Against.Null(aiSettings);
+            Guard.Against.Null(aiSettings.OpenAI);
+            Guard.Against.NullOrEmpty(aiSettings.OpenAI.ModelName);
+            Guard.Against.NullOrEmpty(aiSettings.OpenAI.Key);
+            Guard.Against.NullOrEmpty(aiSettings.OpenAI.Endpoint);
+
+            return aiSettings;
+        }
     }
 }

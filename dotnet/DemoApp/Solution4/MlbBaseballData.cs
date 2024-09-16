@@ -5,12 +5,13 @@ using Core.Utilities.Services;
 
 namespace Solution4
 {
-    public class MlbBaseballPlugin(MlbService mlbService)
+    public class MlbBaseballData(MlbService mlbService)
     {
         private readonly MlbService _mlbService = mlbService;
 
         [KernelFunction, Description("Gets a list of games for a specific baseball team.")]
-        public async Task<string> GetTeamScheduleData(int teamId) {
+        public async Task<string> GetTeamScheduleData(int teamId) 
+        {
             var startDate = DateTime.Now.AddDays(-1);
             var endDate = DateTime.Now.AddDays(14);         
             string tabularData = (await _mlbService.GetTeamSchedule(teamId, startDate, endDate)).FormatScheduleData();

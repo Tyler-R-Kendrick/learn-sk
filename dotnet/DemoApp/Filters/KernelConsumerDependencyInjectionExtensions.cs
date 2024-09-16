@@ -3,26 +3,29 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Filters;
 
-internal static class KernelConsumerDependencyInjectionExtensions
+public static class KernelConsumerDependencyInjectionExtensions
 {
-    private static IKernelBuilder AddKernelConsumer(
-        this IKernelBuilder builder,
-        Func<IServiceProvider, CensorService> censorFactory)
-    {
-        builder.Services
+    public static IServiceCollection AddCustomFilters(
+        this IServiceCollection builder,
+        Func<IServiceProvider, CensorService> censorFactory) => builder
             .AddSingleton<FunctionInvocationLoggingFilter>()
             .AddSingleton<FunctionInvocationRetryFilter>()
             .AddSingleton(censorFactory)
             .AddSingleton<CensoredPromptRenderFilter>();
+    public static IKernelBuilder AddCustomFilters(
+        this IKernelBuilder builder,
+        Func<IServiceProvider, CensorService> censorFactory)
+    {
+        builder.Services.AddCustomFilters(censorFactory);
         return builder;
     }
 
-    internal static IServiceCollection AddKernelConsumer(
+    public static IServiceCollection AddKernelConsumer(
         this IServiceCollection services,
         params string[] bannedPhrases)
         => services.AddSingleton<CustomKernelConsumer>(provider
             => new(Kernel
                 .CreateBuilder()
-                .AddKernelConsumer(_ => new(bannedPhrases))
+                .AddCustomFilters(_ => new(bannedPhrases))
                 .Build()));
 }

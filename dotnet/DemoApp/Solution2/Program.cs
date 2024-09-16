@@ -5,6 +5,7 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
 var kernel = builder.Build();
 
+const string terminationPhrase = "quit";
 string? userInput;
 do
 {
@@ -18,7 +19,7 @@ do
 
   var kernelArgs = new KernelArguments(promptExecutionSettings);
 
-  if (userInput != null && userInput != "quit")
+  if (userInput != null && userInput != terminationPhrase)
   {
     Console.Write("Assistant > ");
     await foreach (var response in kernel.InvokePromptStreamingAsync(userInput, kernelArgs))
@@ -28,4 +29,4 @@ do
     Console.WriteLine();
   }
 }
-while (userInput != "quit");
+while (userInput != terminationPhrase);

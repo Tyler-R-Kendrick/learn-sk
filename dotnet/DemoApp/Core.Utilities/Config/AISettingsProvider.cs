@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Config
 {
-    public static class AISettingsProvider
+    internal static class AISettingsProvider
     {
-        public static AISettings GetSettings()
+        internal static AISettings GetSettings()
         {
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true)

@@ -2,14 +2,7 @@
 using Core.Utilities.Models;
 using Microsoft.SemanticKernel;
 
-AISettings applicationSettings = AISettingsProvider.GetSettings();
-
-var builder = Kernel.CreateBuilder()
-    .AddAzureOpenAIChatCompletion(
-        deploymentName: applicationSettings.OpenAI.ModelName, 
-        endpoint: applicationSettings.OpenAI.Endpoint, 
-        apiKey: applicationSettings.OpenAI.Key);
-
+var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
 var kernel = builder.Build();
 
 string? userInput;

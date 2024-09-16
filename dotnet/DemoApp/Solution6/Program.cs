@@ -11,9 +11,9 @@ public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        var applicationSettings = AISettingsProvider.GetSettings();
-        var ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
-        var validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
+        var ticketAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
+        var validationAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
+
         var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
         var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
         {

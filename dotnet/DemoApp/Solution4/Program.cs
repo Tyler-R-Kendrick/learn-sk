@@ -1,6 +1,5 @@
 ﻿using Core.Utilities;
 using Core.Utilities.Config;
-using Core.Utilities.Models;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
@@ -10,8 +9,7 @@ public class Program : BaseProgram
 {
     static async Task Main(string[] args)
     {
-        AISettings applicationSettings = AISettingsProvider.GetSettings();
-        IKernelBuilder kernelBuilder = CreateKernelWithChatCompletion(applicationSettings);
+        IKernelBuilder kernelBuilder = KernelBuilderProvider.CreateKernelWithChatCompletion();
         HttpClient httpClient = new () { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
         MlbBaseballPlugin mlbBaseballPlugin = new (new MlbService(httpClient));
         OpenAIPromptExecutionSettings settings = new() 

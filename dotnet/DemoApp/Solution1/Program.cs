@@ -15,7 +15,7 @@ do
 
     if (userInput != null && userInput != terminationPhrase)
     {
-        Console.Write("Assistant> ");
+        Console.Write("Assistant > ");
         await foreach (var response in kernel.InvokePromptStreamingAsync(userInput))
         {
             Console.Write(response);

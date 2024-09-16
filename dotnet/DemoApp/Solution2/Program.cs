@@ -20,7 +20,7 @@ do
 
   if (userInput != null && userInput != "quit")
   {
-    Console.Write("Assistant> ");
+    Console.Write("Assistant > ");
     await foreach (var response in kernel.InvokePromptStreamingAsync(userInput, kernelArgs))
     {
       Console.Write(response);

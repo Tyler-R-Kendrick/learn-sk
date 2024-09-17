@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Filters;
 
-internal sealed class CensorService(string[] bannedPhrases)
+public sealed class CensorService(params string[] bannedPhrases)
 {
     private const string
         CensoredText = "[Censored]",

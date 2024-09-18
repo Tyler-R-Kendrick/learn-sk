@@ -16,14 +16,13 @@ do
     Console.Write("User > ");
     userInput = Console.ReadLine();
 
-    //Adding the user prompt to chat history
-    chatHistory.AddUserMessage(userInput);
-
-
     if (userInput != null && userInput != terminationPhrase)
     {
         string fullMessage = "";
         Console.Write("Assistant > ");
+
+        //Adding the user prompt to chat history
+        chatHistory.AddUserMessage(userInput);
 
         await foreach (StreamingChatMessageContent chatUpdate in chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory))
         {

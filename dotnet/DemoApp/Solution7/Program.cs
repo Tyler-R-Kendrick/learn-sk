@@ -1,5 +1,4 @@
-﻿#pragma warning disable SKEXP0110
-using Core.Utilities.Config;
+﻿using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
@@ -53,8 +52,6 @@ const string terminationPhrase = "quit";
 
 do
 {
-    ChatHistory chatHistory = new();
-
     Console.Write("User > ");
     userInput = Console.ReadLine();
 
@@ -73,9 +70,7 @@ do
         };
 
         //Adding the user prompt to chat history
-        chatHistory.AddUserMessage(userInput);
-
-        chat.AddChatMessages(chatHistory);
+        chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, userInput));
 
         await foreach (ChatMessageContent response in chat.InvokeAsync())
         {

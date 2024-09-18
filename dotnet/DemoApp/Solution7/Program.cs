@@ -1,5 +1,4 @@
 ﻿#pragma warning disable SKEXP0110
-using Core.Utilities;
 using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
@@ -8,74 +7,80 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution7;
 
-public class Program : BaseProgram
+IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+Kernel ticketAgentKernel = builder.Build();
+Kernel validationAgentKernel = builder.Build();
+HttpClient httpClient = new();
+OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
 {
-    static async Task Main(string[] args)
+    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
+};
+
+TicketAgent ticketAgent = new(new MlbService(httpClient))
+{
+    Name = "TicketPurchasing",
+    Instructions = 
+        """
+        You are a ticket agent focused on buy baseball tickets for a customer. 
+        You can get the teams schedule from the scheduling tool. 
+        Your goal is to review the schedule and select a single game only from the list.
+        If asked to pick a new game select the next game available
+        """,
+    Description = "Ticket purchesing agent",
+    Kernel = ticketAgentKernel,
+    Arguments = new KernelArguments(openAIPromptExecutionSettings)
+};
+
+ValidationAgent validationAgent = new()
+{
+    Name = "ScheduleValidation",
+    Instructions = 
+        """
+        You are an assistant for a customer. 
+        You are responsible for approving the ticket purchase. 
+        Check the customers schedule to ensure they can attend the baseball game on that date. 
+        You can get the customers schedule from the schedule tool. 
+        If the customer can attend the game respond back with you approve the purchase. 
+        If the customer can not attend responde back with the customer is busy select a new game.
+        """,
+    Description = "Validate the customer schedule is open for that game.",
+    Kernel = validationAgentKernel,
+    Arguments = new KernelArguments(openAIPromptExecutionSettings)
+};
+
+string? userInput;
+const string terminationPhrase = "quit";
+
+do
+{
+    ChatHistory chatHistory = new();
+
+    Console.Write("User > ");
+    userInput = Console.ReadLine();
+
+    if (userInput != null && userInput != terminationPhrase)
     {
-        var applicationSettings = AISettingsProvider.GetSettings();
-        var ticketAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
-        var validationAgentKernel = CreateKernelWithChatCompletion(applicationSettings);
-        var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
-        var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
-        {
-            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
-        };
-
-        var ticketAgent = new TicketAgent(new MlbService(httpClient))
-        {
-            Name = "TicketPurchasing",
-            Instructions = 
-                """
-                You are a ticket agent focused on buy baseball tickets for a customer. 
-                You can get the teams schedule from the scheduling tool. 
-                Your goal is to review the schedule and select a single game only from the list.
-                If asked to pick a new game select the next game available
-                """,
-            Description = "Ticket purchesing agent",
-            Kernel = ticketAgentKernel.Build(),
-            Arguments = new KernelArguments(openAIPromptExecutionSettings)
-        };
-
-        var validationAgent = new ValidationAgent()
-        {
-            Name = "ScheduleValidation",
-            Instructions = 
-                """
-                You are an assistant for a customer. 
-                You are responsible for approving the ticket purchase. 
-                Check the customers schedule to ensure they can attend the baseball game on that date. 
-                You can get the customers schedule from the schedule tool. 
-                If the customer can attend the game respond back with you approve the purchase. 
-                If the customer can not attend responde back with the customer is busy select a new game.
-                """,
-            Description = "Validate the customer schedule is open for that game.",
-            Kernel = validationAgentKernel.Build(),
-            Arguments = new KernelArguments(openAIPromptExecutionSettings)
-        };
-        
-        var chat = new AgentGroupChat(ticketAgent, validationAgent)
+        AgentGroupChat chat = new(ticketAgent, validationAgent)
         {
             ExecutionSettings = new()
             {
-                TerminationStrategy =
-                    new ApprovalTerminationStrategy()
-                    {
-                        Agents = [validationAgent],
-                        MaximumIterations = 10,
-                    }
+                TerminationStrategy = new ApprovalTerminationStrategy()
+                {
+                    Agents = [validationAgent],
+                    MaximumIterations = 10,
+                }
             }
         };
 
-        ChatMessageContent input = new(AuthorRole.User, "Please buy me a ticket for the next Chicago Cubs game.");
+        //Adding the user prompt to chat history
+        chatHistory.AddUserMessage(userInput);
 
-        chat.AddChatMessage(input);
+        chat.AddChatMessages(chatHistory);
 
         await foreach (ChatMessageContent response in chat.InvokeAsync())
         {
             Console.WriteLine(response.Content);
         }
-
-        Console.WriteLine("DONE");
-        Console.ReadLine();
     }
 }
+while (userInput != terminationPhrase);

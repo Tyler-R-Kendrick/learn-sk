@@ -1,29 +1,41 @@
-﻿using Core.Utilities;
-using Core.Utilities.Config;
-using Core.Utilities.Models;
+﻿﻿using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution4;
 
-public class Program : BaseProgram
+IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+Kernel kernel = builder.Build();
+HttpClient httpClient = new();
+MlbBaseballData mlbBaseballPlugin = new(new MlbService(httpClient));
+
+const string terminationPhrase = "quit";
+string? userInput;
+
+//Register the plugin
+kernel.Plugins.AddFromObject(mlbBaseballPlugin);
+
+do
 {
-    static async Task Main(string[] args)
+    Console.Write("User > ");
+    userInput = Console.ReadLine();
+
+    OpenAIPromptExecutionSettings settings = new()
     {
-        AISettings applicationSettings = AISettingsProvider.GetSettings();
-        IKernelBuilder kernelBuilder = CreateKernelWithChatCompletion(applicationSettings);
-        HttpClient httpClient = new ();
-        MlbBaseballData mlbBaseballPlugin = new(new MlbService(httpClient));
-        OpenAIPromptExecutionSettings settings = new() 
-        { 
-            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
-            ChatSystemPrompt = "You are a sports announcer. Summarize the game play-by-play as if you were the famous Cubs announcer Harry Caray."
-        };
+        ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+        ChatSystemPrompt = "You are a sports announcer. Summarize the game play-by-play as if you were the famous Cubs announcer Harry Caray."
+    };
 
-        kernelBuilder.Plugins.AddFromObject(mlbBaseballPlugin);
-        Kernel kernel = kernelBuilder.Build();
+    KernelArguments kernelArgs = new(settings);
 
-        Console.WriteLine(await kernel.InvokePromptAsync("What happened in the last Chicago Cubs game.", new(settings)));
-        Console.ReadLine();
+    if (userInput != null && userInput != terminationPhrase)
+    {
+        Console.Write("Assistant > ");
+        await foreach (var response in kernel.InvokePromptStreamingAsync(userInput, kernelArgs))
+        {
+            Console.Write(response);
+        }
+        Console.WriteLine();
     }
 }
+while (userInput != terminationPhrase);

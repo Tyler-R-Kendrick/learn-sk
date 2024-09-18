@@ -30,6 +30,7 @@ public static class DependencyInjectionExtensions
 
                     MlbBaseballDataPlugin mlbBaseballPlugin = new(new(new()));
                     builder.Plugins.AddFromObject(mlbBaseballPlugin);
+                    builder.Services.AddScoped<MlbCitationFunctionFilter>();
                     builder.Services.AddCustomFilters(_ => new(
                         "Bartman",
                         "Billy Goat Tavern",

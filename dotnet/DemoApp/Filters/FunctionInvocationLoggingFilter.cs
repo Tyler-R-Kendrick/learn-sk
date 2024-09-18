@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Filters;
 
-internal sealed class FunctionInvocationLoggingFilter(ILogger logger)
+public sealed class FunctionInvocationLoggingFilter(ILogger logger)
     : IFunctionInvocationFilter
 {
     public async Task OnFunctionInvocationAsync(
@@ -22,7 +22,7 @@ internal sealed class FunctionInvocationLoggingFilter(ILogger logger)
         if (logger.IsEnabled(LogLevel.Trace))
         {
             logger.LogTrace("function invoked: {Name}", context.Function.Name);
-            logger.LogTrace("result: {Result}", JsonSerializer.Serialize(context.Result));
+            logger.LogTrace("result: {Result}", context.Result);
         }
     }
 }

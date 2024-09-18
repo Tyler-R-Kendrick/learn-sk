@@ -2,7 +2,7 @@
 
 namespace Filters;
 
-internal sealed class FunctionInvocationRetryFilter(ushort times = 3)
+public sealed class FunctionInvocationRetryFilter(ushort times = 3)
     : IFunctionInvocationFilter
 {
     public async Task OnFunctionInvocationAsync(

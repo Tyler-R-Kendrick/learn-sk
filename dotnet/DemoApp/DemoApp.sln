@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution4", "Solution4\Solution4.csproj", "{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoApp", "DemoApp\DemoApp.csproj", "{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF9AF3BD-53DD-4710-968F-0ADE9E0F4536}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -24,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "Core.Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution1", "Solution1\Solution1.csproj", "{FDF6974E-318A-4F78-B44A-66CA39E985EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution5", "Solution5\Solution5.csproj", "{F38F13E3-5E80-4BE6-8F3F-66C78F53BB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution5", "Solution5\Solution5.csproj", "{F38F13E3-5E80-4BE6-8F3F-66C78F53BB13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +34,6 @@ Global
 		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEE133BF-C84D-4DB2-B5C5-83E1B960621F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9C34B34-76B2-496E-98D9-C6C24C69A6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9C34B34-76B2-496E-98D9-C6C24C69A6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9C34B34-76B2-496E-98D9-C6C24C69A6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,8 +68,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {268DC1F2-7C96-48B0-BE0C-ECF185C68B76}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{F38F13E3-5E80-4BE6-8F3F-66C78F53BB13} = {EF9AF3BD-53DD-4710-968F-0ADE9E0F4536}
 	EndGlobalSection
 EndGlobal

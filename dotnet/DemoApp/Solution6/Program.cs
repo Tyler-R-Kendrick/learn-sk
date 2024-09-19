@@ -29,25 +29,24 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };
 
-ChatHistory chatMessageContents = new();
-chatMessageContents.AddUserMessage("Are there any games coming up for the Chicago Cubs game.");
+const string terminationPhrase = "quit";
+string? userInput;
+ChatHistory chatHistory = new();
 
-await foreach (ChatMessageContent response in ticketAgent.InvokeAsync(chatMessageContents))
+do
 {
-    Console.WriteLine(response.Content);
-}
+    Console.Write("User > ");
+    userInput = Console.ReadLine();
 
-var userResponse = Console.ReadLine();
-
-if (userResponse != null && userResponse.ToUpper() != "EXIT")
-{
-    chatMessageContents.AddUserMessage(userResponse);
-
-    await foreach (ChatMessageContent response in ticketAgent.InvokeAsync(chatMessageContents))
+    if (userInput != null && userInput != terminationPhrase)
     {
-        Console.WriteLine(response.Content);
+        //Adding the user prompt to chat history
+        chatHistory.AddUserMessage(userInput);
+
+        await foreach (ChatMessageContent response in ticketAgent.InvokeAsync(chatHistory))
+        {
+            Console.WriteLine(response.Content);
+        }
     }
 }
-
-Console.WriteLine("DONE");
-Console.ReadLine();
+while (userInput != terminationPhrase);

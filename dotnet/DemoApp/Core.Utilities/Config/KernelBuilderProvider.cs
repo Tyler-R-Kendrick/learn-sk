@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Config
 {
-  public static class KernelBuilderProvider
-  {
-    public static IKernelBuilder CreateKernelWithChatCompletion()
+    public static class KernelBuilderProvider
     {
-      var applicationSettings = AISettingsProvider.GetSettings();
+        public static IKernelBuilder CreateKernelWithChatCompletion()
+        {
+            var applicationSettings = AISettingsProvider.GetSettings();
 
-      var builder = Kernel.CreateBuilder();
+            var builder = Kernel.CreateBuilder();
 
-      builder.AddAzureOpenAIChatCompletion(
-          applicationSettings.OpenAI.ModelName,
-          applicationSettings.OpenAI.Endpoint,
-          applicationSettings.OpenAI.Key);
+            builder.AddAzureOpenAIChatCompletion(
+                applicationSettings.OpenAI.ModelName,
+                applicationSettings.OpenAI.Endpoint,
+                applicationSettings.OpenAI.Key);
 
-      return builder;
+            return builder;
+        }
+
     }
-
-  }
 }

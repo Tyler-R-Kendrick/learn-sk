@@ -1,5 +1,4 @@
 ﻿#pragma warning disable SKEXP0110
-using Core.Utilities;
 using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
@@ -8,8 +7,9 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution7;
 
-var ticketAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
-var validationAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
+var ticketAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion().Build();
+var validationAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion().Build();
+
 
 var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
 var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
@@ -17,7 +17,7 @@ var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };
 
-var ticketAgent = new TicketAgent(new MlbService(httpClient))
+TicketAgent ticketAgent = new(new MlbService(httpClient))
 {
     Name = "TicketPurchasing",
     Instructions = 
@@ -28,11 +28,11 @@ var ticketAgent = new TicketAgent(new MlbService(httpClient))
         If asked to pick a new game select the next game available
         """,
     Description = "Ticket purchesing agent",
-    Kernel = ticketAgentKernel.Build(),
+    Kernel = ticketAgentKernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };
 
-var validationAgent = new ValidationAgent()
+ValidationAgent validationAgent = new()
 {
     Name = "ScheduleValidation",
     Instructions = 
@@ -45,31 +45,43 @@ var validationAgent = new ValidationAgent()
         If the customer can not attend responde back with the customer is busy select a new game.
         """,
     Description = "Validate the customer schedule is open for that game.",
-    Kernel = validationAgentKernel.Build(),
+    Kernel = validationAgentKernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };
-        
-var chat = new AgentGroupChat(ticketAgent, validationAgent)
+
+string? userInput;
+const string terminationPhrase = "quit";
+
+do
 {
-    ExecutionSettings = new()
+    ChatHistory chatHistory = new();
+
+    Console.Write("User > ");
+    userInput = Console.ReadLine();
+
+    if (userInput != null && userInput != terminationPhrase)
     {
-        TerminationStrategy =
-            new ApprovalTerminationStrategy()
+        AgentGroupChat chat = new(ticketAgent, validationAgent)
+        {
+            ExecutionSettings = new()
             {
-                Agents = [validationAgent],
-                MaximumIterations = 10,
+                TerminationStrategy = new ApprovalTerminationStrategy()
+                {
+                    Agents = [validationAgent],
+                    MaximumIterations = 10,
+                }
             }
+        };
+
+        //Adding the user prompt to chat history
+        chatHistory.AddUserMessage(userInput);
+
+        chat.AddChatMessages(chatHistory);
+
+        await foreach (ChatMessageContent response in chat.InvokeAsync())
+        {
+            Console.WriteLine(response.Content);
+        }
     }
-};
-
-ChatMessageContent input = new(AuthorRole.User, "Please buy me a ticket for the next Chicago Cubs game.");
-
-chat.AddChatMessage(input);
-
-await foreach (ChatMessageContent response in chat.InvokeAsync())
-{
-    Console.WriteLine(response.Content);
 }
-
-Console.WriteLine("DONE");
-Console.ReadLine();
+while (userInput != terminationPhrase);

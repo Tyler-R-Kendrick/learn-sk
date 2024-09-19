@@ -19,12 +19,12 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
     Name = "TicketPurchasing",
     Instructions =
         """
-        You are a ticket agent focused on buy baseball tickets for a customer. 
-        You can get the teams schedule from the scheduling tool. 
+        You are a ticket agent focused on buying baseball tickets for a customer. 
+        You can get the team's schedule from the scheduling tool. 
         Your goal is to review the schedule and select a game from the list.
         If the user wants to purchase the ticket let them know they are all set and have a ticket for the game.
         """,
-    Description = "Ticket purchesing agent",
+    Description = "Ticket purchasing agent",
     Kernel = kernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };

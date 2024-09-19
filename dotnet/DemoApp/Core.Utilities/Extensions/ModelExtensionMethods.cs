@@ -43,7 +43,6 @@ namespace Core.Utilities.Extensions
         public static string FormatGameData(this Game game)
         {
             StringBuilder stringBuilder = new();
-            int counter = 0;
 
             stringBuilder.AppendLine("| GamePk | GameDate |");
             stringBuilder.AppendLine("| ----- | ----- |");

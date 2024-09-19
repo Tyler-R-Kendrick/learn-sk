@@ -11,6 +11,7 @@ namespace Core.Utilities.Config
         {
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true)
+                .AddEnvironmentVariables()
                 .AddUserSecrets(Assembly.GetExecutingAssembly())
                 .Build();
 

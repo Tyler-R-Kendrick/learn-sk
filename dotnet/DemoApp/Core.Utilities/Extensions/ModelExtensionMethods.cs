@@ -40,6 +40,17 @@ namespace Core.Utilities.Extensions
             return stringBuilder.ToString();
         }
 
+        public static string FormatGameData(this Game game)
+        {
+            StringBuilder stringBuilder = new();
+
+            stringBuilder.AppendLine("| GamePk | GameDate |");
+            stringBuilder.AppendLine("| ----- | ----- |");
+            stringBuilder.AppendLine($"| {game.GamePk} | {game.GameDate} |");
+
+            return stringBuilder.ToString();
+        }
+
         public static string FormatPlayByPlayData(this List<Play> plays)
         {
             StringBuilder stringBuilder = new();

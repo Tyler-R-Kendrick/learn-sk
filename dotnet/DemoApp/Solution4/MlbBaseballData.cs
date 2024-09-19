@@ -2,6 +2,9 @@
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
 using Core.Utilities.Services;
+using Core.Utilities.Models;
+using System.Text;
+using System.Diagnostics.Metrics;
 
 namespace Solution4
 {
@@ -28,14 +31,14 @@ namespace Solution4
 
 
         [KernelFunction, Description("Gets the teams last played game id.")]
-        public async Task<int> GetTeamsLastPlayedGameId(int teamId)
+        public async Task<string> GetTeamsLastPlayedGameId(int teamId)
         {
             var startDate = DateTime.Now.AddDays(-4);
             var endDate = DateTime.Now.AddDays(-1);
             var t = await _mlbService.GetTeamSchedule(teamId, startDate, endDate);
-            int gamePk = (await _mlbService.GetTeamSchedule(teamId, startDate, endDate)).Dates.Last().Games.Last().GamePk;
+            Game game = (await _mlbService.GetTeamSchedule(teamId, startDate, endDate)).Dates.Last().Games.Last();
 
-            return gamePk;
+            return game.FormatGameData();
         }
 
         [KernelFunction, Description("Gets the play by play for a specific game.")]

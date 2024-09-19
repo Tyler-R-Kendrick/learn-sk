@@ -43,7 +43,7 @@ ValidationAgent validationAgent = new()
         If the executive can attend the game, respond back with you approve the purchase. 
         If the executive can not attend, respond back with the executive is busy select a new game.
         """,
-    Description = "Validate the customer schedule is open for that game.",
+    Description = "Validate the executive's schedule is open for that game.",
     Kernel = validationAgentKernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };

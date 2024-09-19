@@ -6,8 +6,8 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Solution6;
 
-IKernelBuilder ticketAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
-IKernelBuilder validationAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion();
+IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+Kernel kernel = builder.Build();
 HttpClient httpClient = new();
 OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
 {
@@ -25,7 +25,7 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
         If the user wants to purchase the ticket let them know they are all set and have a ticket for the game.
         """,
     Description = "Ticket purchesing agent",
-    Kernel = ticketAgentKernel.Build(),
+    Kernel = kernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };
 

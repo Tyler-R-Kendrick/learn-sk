@@ -1,10 +1,5 @@
-﻿#pragma warning disable SKEXP0110
-#pragma warning disable SKEXP0001
-#pragma warning disable SKEXP0101
-using Microsoft.SemanticKernel;
+﻿using Microsoft.SemanticKernel;
 using System.ComponentModel;
-using System.Net.Http.Json;
-using Core.Utilities.Models;
 using Core.Utilities.Extensions;
 using Core.Utilities.Agents;
 using Core.Utilities.Services;
@@ -14,7 +9,6 @@ namespace Solution7
     public class TicketAgent(MlbService mlbService) : BaseAgent
     {
         private readonly MlbService _mlbService = mlbService;
-        private bool pluginsRegistered = false;
 
         [KernelFunction, Description("Gets a list of games for a specific baseball team.")]
         public async Task<string> GetTeamScheduleData(int teamId)

@@ -8,7 +8,7 @@ namespace Core.Utilities.Extensions
     {
         public static string FormatScheduleData(this Schedule schedule)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             stringBuilder.AppendLine("| Home Team | Away Team | Date |");
             stringBuilder.AppendLine("| ----- | ----- | ----- |");
@@ -26,7 +26,7 @@ namespace Core.Utilities.Extensions
 
         public static string FormatTeamData(this MlbTeams teams)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
 
             stringBuilder.AppendLine("| Team Id | Name |");
             stringBuilder.AppendLine("| ----- | ----- |");
@@ -42,7 +42,7 @@ namespace Core.Utilities.Extensions
 
         public static string FormatPlayByPlayData(this List<Play> plays)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             int counter = 0;
 
             stringBuilder.AppendLine("| Play Number | Play Result |");

@@ -21,12 +21,12 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
     Name = "TicketPurchasing",
     Instructions = 
         """
-        You are a ticket agent focused on buy baseball tickets for a customer. 
+        You are a ticket agent focused on buying baseball tickets for a customer. 
         You can get the teams schedule from the scheduling tool. 
         Your goal is to review the schedule and select a single game only from the list.
-        If asked to pick a new game select the next game available
+        If asked to pick a new game select the next game available.
         """,
-    Description = "Ticket purchesing agent",
+    Description = "Ticket purchasing agent",
     Kernel = ticketAgentKernel,
     Arguments = new KernelArguments(openAIPromptExecutionSettings)
 };
@@ -34,14 +34,14 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
 ValidationAgent validationAgent = new()
 {
     Name = "ScheduleValidation",
-    Instructions = 
+    Instructions =
         """
-        You are an assistant for a customer. 
+        You are an assistant for an executive. 
         You are responsible for approving the ticket purchase. 
-        Check the customers schedule to ensure they can attend the baseball game on that date. 
-        You can get the customers schedule from the schedule tool. 
-        If the customer can attend the game respond back with you approve the purchase. 
-        If the customer can not attend responde back with the customer is busy select a new game.
+        Check the executive's schedule to ensure they can attend the baseball game on that date. 
+        You can get the schedule's schedule from the schedule tool. 
+        If the executive can attend the game, respond back with you approve the purchase. 
+        If the executive can not attend, respond back with the executive is busy select a new game.
         """,
     Description = "Validate the customer schedule is open for that game.",
     Kernel = validationAgentKernel,

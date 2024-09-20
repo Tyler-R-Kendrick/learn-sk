@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <UserSecretsId>7037ee07-27bb-492b-bbba-785e19adcc96</UserSecretsId>
   </PropertyGroup>
 	<PropertyGroup>

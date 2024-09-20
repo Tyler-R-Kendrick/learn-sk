@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.19.0" />
+  </ItemGroup>
+
+</Project>

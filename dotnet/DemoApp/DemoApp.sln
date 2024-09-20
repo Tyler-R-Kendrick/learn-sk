@@ -3,26 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution4", "Solution4\Solution4.csproj", "{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF9AF3BD-53DD-4710-968F-0ADE9E0F4536}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution7", "Solution7\Solution7.csproj", "{D8879C82-ED2A-40C3-97FE-7AB736814DFF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution6", "Solution6\Solution6.csproj", "{FBDFC27C-0604-4F9C-BC31-335577B50998}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution3", "Solution3\Solution3.csproj", "{6B8375E7-21A0-4DEC-A65F-255D92044967}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Utilities", "Core.Utilities\Core.Utilities.csproj", "{C075F808-10DE-4709-B6D3-89A009591421}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution1", "Solution1\Solution1.csproj", "{FDF6974E-318A-4F78-B44A-66CA39E985EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution1", "Solutions\Solution1\Solution1.csproj", "{FDF6974E-318A-4F78-B44A-66CA39E985EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution5", "Solution5\Solution5.csproj", "{F38F13E3-5E80-4BE6-8F3F-66C78F53BB13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution2", "Solutions\Solution2\Solution2.csproj", "{A6C17403-E61A-4563-9135-B4E29B7E6F98}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution2", "Solution2\Solution2.csproj", "{A6C17403-E61A-4563-9135-B4E29B7E6F98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution3", "Solutions\Solution3\Solution3.csproj", "{6B8375E7-21A0-4DEC-A65F-255D92044967}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution4", "Solutions\Solution4\Solution4.csproj", "{E1CB1B8E-8027-4344-88E5-FFDDEDBE829C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution5", "Solutions\Solution5\Solution5.csproj", "{F38F13E3-5E80-4BE6-8F3F-66C78F53BB13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution6", "Solutions\Solution6\Solution6.csproj", "{FBDFC27C-0604-4F9C-BC31-335577B50998}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solution7", "Solutions\Solution7\Solution7.csproj", "{D8879C82-ED2A-40C3-97FE-7AB736814DFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Utilities\Core.Utilities.csproj" />
-    <ProjectReference Include="..\Filters\Filters.csproj" />
   </ItemGroup>
 
   <ItemGroup>

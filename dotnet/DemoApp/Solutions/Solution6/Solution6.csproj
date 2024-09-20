@@ -1,19 +1,3 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <UserSecretsId>7037ee07-27bb-492b-bbba-785e19adcc96</UserSecretsId>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Ardalis.GuardClauses" Version="4.6.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.19.0" />
-    <PackageReference Include="Microsoft.SemanticKernel.Abstractions" Version="1.19.0" />
-    <PackageReference Include="Microsoft.SemanticKernel.Agents.Abstractions" Version="1.19.0-alpha" />
-    <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.19.0-alpha" />
-    <PackageReference Include="Microsoft.SemanticKernel.Core" Version="1.19.0" />
-  </ItemGroup>
-
 </Project>

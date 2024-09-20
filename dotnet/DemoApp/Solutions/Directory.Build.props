@@ -5,6 +5,10 @@
         <OutputType>Exe</OutputType>
 	</PropertyGroup>
 
+    <PropertyGroup>
+        <UserSecretsId>7037ee07-27bb-492b-bbba-785e19adcc96</UserSecretsId>
+    </PropertyGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\Core.Utilities\Core.Utilities.csproj" />
     </ItemGroup>

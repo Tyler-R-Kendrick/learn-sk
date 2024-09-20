@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <UserSecretsId>7037ee07-27bb-492b-bbba-785e19adcc96</UserSecretsId>
 		<NoWarn>SKEXP0110;SKEXP0001;SKEXP0101</NoWarn>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 	</PropertyGroup>
 
 </Project>

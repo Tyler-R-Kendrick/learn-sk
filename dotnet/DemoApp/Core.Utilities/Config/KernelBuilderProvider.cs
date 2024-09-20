@@ -1,28 +1,17 @@
-﻿using Core.Utilities.Models;
-using Microsoft.SemanticKernel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.SemanticKernel;
 
-namespace Core.Utilities.Config
+namespace Core.Utilities.Config;
+
+public static class KernelBuilderProvider
 {
-    public static class KernelBuilderProvider
+    public static IKernelBuilder CreateKernelWithChatCompletion()
     {
-        public static IKernelBuilder CreateKernelWithChatCompletion()
-        {
-            var applicationSettings = AISettingsProvider.GetSettings();
-
-            var builder = Kernel.CreateBuilder();
-
-            builder.AddAzureOpenAIChatCompletion(
+        var applicationSettings = AISettingsProvider.GetSettings();
+        return Kernel
+            .CreateBuilder()
+            .AddAzureOpenAIChatCompletion(
                 applicationSettings.OpenAI.ModelName,
                 applicationSettings.OpenAI.Endpoint,
                 applicationSettings.OpenAI.Key);
-
-            return builder;
-        }
-
     }
 }

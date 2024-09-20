@@ -8,23 +8,27 @@ public class MlbCitationFunctionFilter : IFunctionInvocationFilter
         FunctionInvocationContext context,
         Func<FunctionInvocationContext, Task> next)
     {
-        if(context.Function.PluginName != nameof(MlbBaseballDataPlugin)) return;
         await next(context);
+        if(context.Function.PluginName != nameof(MlbBaseballDataPlugin)) return;
         var result = context.Result;
-        object? citationsObj = null;
-        result.Metadata?.TryGetValue("citations", out citationsObj);
+        Console.WriteLine($"intercepting MlbBaseballDataPlugin.{context.Function.Name}");
+        context.Arguments.TryGetValue("citations", out object? citationsObj);
         var citations = citationsObj as string[];
         var citationsLength = citations?.Length ?? 0;   
 #pragma warning disable SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         var prompt = result.RenderedPrompt;
 #pragma warning restore SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         var citationIndex = citationsLength + 1;
+        Console.WriteLine("formatting citation");
         var citation = FormatCitation(citationIndex, context.Function.Name, context.Arguments);
+        Console.WriteLine($"formatted citation: {citation}");
         citations = [..citations, citation];
         var rewrittenResponse = $"{prompt} [^{++citationIndex}]{Environment.NewLine}{citation}";
+        Console.WriteLine("rewrittenResponse:" + rewrittenResponse);
+        context.Arguments["citations"] = new Dictionary<string, object?>() { ["citations"] = citations };
         context.Result = new(result, rewrittenResponse)
         {
-            Metadata = new Dictionary<string, object?>() { ["citations"] = citations }
+            //Metadata = new Dictionary<string, object?>() { ["citations"] = citations }
         };
     }
 

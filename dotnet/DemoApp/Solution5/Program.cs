@@ -23,11 +23,10 @@ using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
   );
 ILogger logger = loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
 
-kernelBuilder.Services.AddSingleton<ILogger>(_ => logger);
+kernelBuilder.Services.AddSingleton(_ => logger);
 
 // Add the filters to the kernel.
 kernelBuilder.Services.AddSingleton<IFunctionInvocationFilter, FunctionInvocationLoggingFilter>();
-kernelBuilder.Services.AddSingleton<IFunctionInvocationFilter, FunctionInvocationRetryFilter>();
 kernelBuilder.Services.AddSingleton<CensorService>(_ => new("Bartman", "Billy Goat Tavern", "William Sianis", "Sox"));
 kernelBuilder.Services.AddSingleton<IPromptRenderFilter, CensoredPromptRenderFilter>();
 
@@ -60,5 +59,3 @@ do
   }
 }
 while (userInput != terminationPhrase);
-
-

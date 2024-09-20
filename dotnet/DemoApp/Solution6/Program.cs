@@ -31,7 +31,7 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
 
 const string terminationPhrase = "quit";
 string? userInput;
-ChatHistory chatHistory = new();
+ChatHistory chatHistory = [];
 
 do
 {
@@ -43,7 +43,7 @@ do
         //Adding the user prompt to chat history
         chatHistory.AddUserMessage(userInput);
 
-        await foreach (ChatMessageContent response in ticketAgent.InvokeAsync(chatHistory))
+        await foreach (var response in ticketAgent.InvokeAsync(chatHistory))
         {
             Console.WriteLine(response.Content);
         }

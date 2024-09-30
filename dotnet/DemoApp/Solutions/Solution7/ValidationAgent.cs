@@ -2,22 +2,18 @@
 using Core.Utilities.Agents;
 using System.ComponentModel;
 
-namespace Solution7
+namespace Solution7;
+
+public class ValidationAgent : BaseAgent
 {
-    public class ValidationAgent : BaseAgent
+    private readonly Random _random = new();
+
+    [KernelFunction, Description("Gets the executives schedule.")]
+    public string GetExecutivesScheduleData()
     {
-        [KernelFunction, Description("Gets the executives schedule.")]
-        public string GetExecutivesScheduleData()
-        {
-            var random = new Random();
-            var next = random.Next(1, 4);
-
-            if (next != 1)
-            {
-                return "Schedule is full for this day";
-            }
-
-            return "Schedule is open for this day";
-        }
+        var next = _random.Next(1, 4);
+        return next != 1
+            ? "Schedule is full for this day"
+            : "Schedule is open for this day";
     }
 }

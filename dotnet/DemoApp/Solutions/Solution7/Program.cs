@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Config;
 using Core.Utilities.Services;
+using Core.Utilities.Agents;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents;
 using Microsoft.SemanticKernel.ChatCompletion;
@@ -9,14 +10,13 @@ using Solution7;
 var ticketAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion().Build();
 var validationAgentKernel = KernelBuilderProvider.CreateKernelWithChatCompletion().Build();
 
-
-var httpClient = new HttpClient() { BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/") };
-var openAIPromptExecutionSettings = new OpenAIPromptExecutionSettings()
+HttpClient httpClient = new() { BaseAddress = new("http://statsapi.mlb.com/api/v1/") };
+OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
 {
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };
-
-TicketAgent ticketAgent = new(new MlbService(httpClient))
+MlbService mlbService = new(httpClient);
+TicketAgent ticketAgent = new(mlbService)
 {
     Name = "TicketPurchasing",
     Instructions = 
@@ -28,7 +28,7 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
         """,
     Description = "Ticket purchasing agent",
     Kernel = ticketAgentKernel,
-    Arguments = new KernelArguments(openAIPromptExecutionSettings)
+    Arguments = new(openAIPromptExecutionSettings)
 };
 
 ValidationAgent validationAgent = new()
@@ -45,7 +45,7 @@ ValidationAgent validationAgent = new()
         """,
     Description = "Validate the executive's schedule is open for that game.",
     Kernel = validationAgentKernel,
-    Arguments = new KernelArguments(openAIPromptExecutionSettings)
+    Arguments = new(openAIPromptExecutionSettings)
 };
 
 string? userInput;
@@ -71,8 +71,7 @@ do
         };
 
         //Adding the user prompt to chat history
-        chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, userInput));
-
+        chat.AddChatMessage(new(AuthorRole.User, userInput));
         await foreach (ChatMessageContent response in chat.InvokeAsync())
         {
             Console.WriteLine(response.Content);

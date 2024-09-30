@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Config;
+using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Core.Utilities.Agents;
 using Microsoft.SemanticKernel;
@@ -19,7 +19,7 @@ MlbService mlbService = new(httpClient);
 TicketAgent ticketAgent = new(mlbService)
 {
     Name = "TicketPurchasing",
-    Instructions = 
+    Instructions =
         """
         You are a ticket agent focused on buying baseball tickets for a customer. 
         You can get the teams schedule from the scheduling tool. 

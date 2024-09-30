@@ -1,20 +1,20 @@
-﻿#pragma warning disable SKEXP0110
+#pragma warning disable SKEXP0110
 using Core.Utilities.Config;
 using Core.Utilities.Services;
+using Core.Utilities.Agents;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Solution6;
 
-IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
-Kernel kernel = builder.Build();
+var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+var kernel = builder.Build();
 HttpClient httpClient = new();
 OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
 {
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };
-
-TicketAgent ticketAgent = new(new MlbService(httpClient))
+MlbService mlbService = new(httpClient);
+TicketAgent ticketAgent = new(mlbService)
 {
     Name = "TicketPurchasing",
     Instructions =
@@ -26,7 +26,7 @@ TicketAgent ticketAgent = new(new MlbService(httpClient))
         """,
     Description = "Ticket purchasing agent",
     Kernel = kernel,
-    Arguments = new KernelArguments(openAIPromptExecutionSettings)
+    Arguments = new(openAIPromptExecutionSettings)
 };
 
 const string terminationPhrase = "quit";

@@ -8,5 +8,5 @@ internal class CustomKernelConsumer(Kernel kernel)
     {
         var result = await kernel.InvokePromptAsync(input, [], cancellationToken: token);
         return result.ToString();
-    }    
+    }
 }

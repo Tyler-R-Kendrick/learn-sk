@@ -1,8 +1,8 @@
-﻿using Core.Utilities.Config;
+using Core.Utilities.Config;
 using Microsoft.SemanticKernel;
 
-IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
-Kernel kernel = builder.Build();
+var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+var kernel = builder.Build();
 
 // Execute program.
 const string terminationPhrase = "quit";

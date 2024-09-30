@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Services;
+using Core.Utilities.Services;
 using Core.Utilities.Extensions;
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
@@ -42,4 +42,3 @@ public class MlbBaseballDataPlugin(MlbService mlbService)
         return response.FormatPlayByPlayData();
     }
 }
-

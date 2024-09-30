@@ -1,4 +1,4 @@
-﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel;
 using Core.Utilities.Agents;
 using System.ComponentModel;
 

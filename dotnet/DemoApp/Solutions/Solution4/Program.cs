@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Config;
+using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
@@ -7,7 +7,8 @@ using Solution4;
 IKernelBuilder builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
 Kernel kernel = builder.Build();
 HttpClient httpClient = new();
-MlbBaseballData mlbBaseballPlugin = new(new MlbService(httpClient));
+MlbService mlbService = new(httpClient);
+MlbBaseballData mlbBaseballPlugin = new(mlbService);
 
 const string terminationPhrase = "quit";
 string? userInput;

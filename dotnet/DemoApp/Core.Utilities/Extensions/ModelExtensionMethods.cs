@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Models;
+using Core.Utilities.Models;
 using System.Text;
 using System.Text.Json;
 

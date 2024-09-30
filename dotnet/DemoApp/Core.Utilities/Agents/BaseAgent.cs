@@ -1,4 +1,4 @@
-﻿using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel;
 using System.Runtime.CompilerServices;
 using Microsoft.SemanticKernel.Agents;
@@ -14,7 +14,8 @@ namespace Core.Utilities.Agents
             KernelArguments? arguments = null,
             Kernel? kernel = null,
             [EnumeratorCancellation] CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             List<StreamingChatMessageContent> contents = [];
 
             await foreach (var result in InvokeStreamingAsync(history, arguments, kernel, cancellationToken))
@@ -29,7 +30,8 @@ namespace Core.Utilities.Agents
             KernelArguments? arguments = null,
             Kernel? kernel = null,
             [EnumeratorCancellation] CancellationToken cancellationToken = default
-        ) {
+        )
+        {
             kernel ??= Kernel;
             arguments ??= Arguments;
 

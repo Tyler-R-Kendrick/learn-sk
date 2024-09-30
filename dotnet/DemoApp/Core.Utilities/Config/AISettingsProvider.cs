@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+using Ardalis.GuardClauses;
 using Core.Utilities.Models;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;

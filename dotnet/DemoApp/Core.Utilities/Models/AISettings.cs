@@ -1,4 +1,4 @@
-﻿namespace Core.Utilities.Models;
+namespace Core.Utilities.Models;
 
 public record AISettings(
     OpenAI OpenAI

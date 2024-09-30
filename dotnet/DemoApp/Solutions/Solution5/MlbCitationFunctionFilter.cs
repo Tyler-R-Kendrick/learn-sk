@@ -16,9 +16,7 @@ public class MlbCitationFunctionFilter : IFunctionInvocationFilter
         context.Arguments.TryGetValue("citations", out object? citationsObj);
         var citations = citationsObj as string[];
         var citationsLength = citations?.Length ?? 0;
-#pragma warning disable SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         var prompt = result.RenderedPrompt;
-#pragma warning restore SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         var citationIndex = citationsLength + 1;
         Console.WriteLine("formatting citation");
         var citation = FormatCitation(citationIndex, context.Function.Name, context.Arguments);

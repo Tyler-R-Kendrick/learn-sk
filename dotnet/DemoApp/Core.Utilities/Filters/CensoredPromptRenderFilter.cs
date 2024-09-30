@@ -1,6 +1,7 @@
 using Microsoft.SemanticKernel;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
+using Services;
 
 public sealed class CensoredPromptRenderFilter(CensorService censor)
     : IPromptRenderFilter
@@ -19,7 +20,8 @@ public sealed class CensoredPromptRenderFilter(CensorService censor)
         }
         catch
         {
-            context.Result = new FunctionResult(context.Function, "I'm sorry, you've mentioned a topic that's very sensitive to Cubs fans. I cannot continue this conversation.");
+            context.Result = new(context.Function,
+                "I'm sorry, you've mentioned a topic that's very sensitive to Cubs fans. I cannot continue this conversation.");
         }
     }
 }

@@ -1,7 +1,8 @@
 using Microsoft.SemanticKernel;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
+using Services;
 
 public static class KernelConsumerDependencyInjectionExtensions
 {

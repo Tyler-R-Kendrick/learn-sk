@@ -1,6 +1,6 @@
 using Microsoft.SemanticKernel;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
 
 internal class CustomKernelConsumer(Kernel kernel)
 {

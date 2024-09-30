@@ -1,14 +1,13 @@
 using Core.Utilities.Config;
 using Core.Utilities.Services;
 using Core.Utilities.Plugins;
-using Filters;
+using Core.Utilities.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Solution5;
 
-IKernelBuilder kernelBuilder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+var kernelBuilder = KernelBuilderProvider.CreateKernelWithChatCompletion();
 
 // Add the MLB Baseball Data Plugin to the kernel.
 HttpClient httpClient = new();
@@ -18,12 +17,12 @@ MlbBaseballDataPlugin mlbBaseballPlugin = new(mlbService);
 kernelBuilder.Plugins.AddFromObject(mlbBaseballPlugin);
 
 // Add a logger to the Kernel's dependency injection provider, so the function filters can use it.
-using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+using var loggerFactory = LoggerFactory.Create(builder =>
   builder
     .AddFilter("FunctionInvocationLoggingFilter", LogLevel.Trace)
     .AddConsole()
   );
-ILogger logger = loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
+var logger = loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
 
 kernelBuilder.Services.AddSingleton(_ => logger);
 

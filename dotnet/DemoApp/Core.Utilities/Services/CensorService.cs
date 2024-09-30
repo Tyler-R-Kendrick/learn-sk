@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Filters;
+namespace Core.Utilities.Services;
 
 public sealed class CensorService(params string[] bannedPhrases)
 {

@@ -3,7 +3,7 @@ using Core.Utilities.Extensions;
 using Microsoft.SemanticKernel;
 using System.ComponentModel;
 
-namespace Solution5;
+namespace Core.Utilities.Plugins;
 
 public class MlbBaseballDataPlugin(MlbService mlbService)
 {
@@ -22,7 +22,6 @@ public class MlbBaseballDataPlugin(MlbService mlbService)
         var response = await mlbService.GetTeams();
         return response.FormatTeamData();
     }
-
 
     [KernelFunction, Description("Gets the teams last played game id.")]
     public async Task<int> GetTeamsLastPlayedGameId(int teamId)

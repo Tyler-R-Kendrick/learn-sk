@@ -1,5 +1,6 @@
 using Core.Utilities.Config;
 using Core.Utilities.Services;
+using Core.Utilities.Plugins;
 using Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

@@ -1,6 +1,6 @@
 using Microsoft.SemanticKernel;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
 
 internal class CustomKernelConsumer(Kernel kernel)
 {
@@ -8,5 +8,5 @@ internal class CustomKernelConsumer(Kernel kernel)
     {
         var result = await kernel.InvokePromptAsync(input, [], cancellationToken: token);
         return result.ToString();
-    }    
+    }
 }

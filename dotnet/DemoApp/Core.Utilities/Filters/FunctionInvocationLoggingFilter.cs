@@ -2,7 +2,7 @@ using Microsoft.SemanticKernel;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
 
 public sealed class FunctionInvocationLoggingFilter(ILogger logger)
     : IFunctionInvocationFilter

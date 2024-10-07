@@ -1,6 +1,6 @@
-﻿using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel;
 
-namespace Filters;
+namespace Core.Utilities.Filters;
 
 public sealed class FunctionInvocationRetryFilter(ushort times = 3)
     : IFunctionInvocationFilter

@@ -1,4 +1,5 @@
 using Microsoft.SemanticKernel;
+using Core.Utilities.Plugins;
 
 namespace Solution5;
 
@@ -9,27 +10,22 @@ public class MlbCitationFunctionFilter : IFunctionInvocationFilter
         Func<FunctionInvocationContext, Task> next)
     {
         await next(context);
-        if(context.Function.PluginName != nameof(MlbBaseballDataPlugin)) return;
+        if (context.Function.PluginName != nameof(MlbBaseballDataPlugin)) return;
         var result = context.Result;
         Console.WriteLine($"intercepting MlbBaseballDataPlugin.{context.Function.Name}");
         context.Arguments.TryGetValue("citations", out object? citationsObj);
         var citations = citationsObj as string[];
-        var citationsLength = citations?.Length ?? 0;   
-#pragma warning disable SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        var citationsLength = citations?.Length ?? 0;
         var prompt = result.RenderedPrompt;
-#pragma warning restore SKEXP0001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
         var citationIndex = citationsLength + 1;
         Console.WriteLine("formatting citation");
         var citation = FormatCitation(citationIndex, context.Function.Name, context.Arguments);
         Console.WriteLine($"formatted citation: {citation}");
-        citations = [..citations, citation];
+        citations = [.. citations, citation];
         var rewrittenResponse = $"{prompt} [^{++citationIndex}]{Environment.NewLine}{citation}";
         Console.WriteLine("rewrittenResponse:" + rewrittenResponse);
         context.Arguments["citations"] = new Dictionary<string, object?>() { ["citations"] = citations };
-        context.Result = new(result, rewrittenResponse)
-        {
-            //Metadata = new Dictionary<string, object?>() { ["citations"] = citations }
-        };
+        context.Result = new(result, rewrittenResponse);
     }
 
     private string FormatCitation(int index, string functionName, KernelArguments args)
@@ -48,7 +44,7 @@ public class MlbCitationFunctionFilter : IFunctionInvocationFilter
             nameof(MlbBaseballDataPlugin.GetTeamScheduleData) => GetCitation(functionName),
             nameof(MlbBaseballDataPlugin.GetTeamsLastPlayedGameId) => GetCitation(functionName),
             string path when path == nameof(MlbBaseballDataPlugin.GetTeamIdsData) => GetPath(path, args),
-            _ => apiEndpoint 
+            _ => apiEndpoint
         };
     }
 }

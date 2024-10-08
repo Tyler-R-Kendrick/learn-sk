@@ -1,0 +1,5 @@
+asyncio
+pydantic
+python-dotenv
+semantic-kernel
+azure-ai-generative

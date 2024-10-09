@@ -19,4 +19,4 @@ class FunctionInvocationLoggingFilter:
 
         if self.logger.level == logging.DEBUG:
             self.logger.debug(f"function invoked: {context.function.name}")
-            self.logger.debug(f"results: {context.result}")
+            self.logger.debug(f"results: \n {context.result}")

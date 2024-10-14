@@ -1,0 +1,13 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csdevkit",
+				"ms-dotnettools.dotnet-interactive-vscode",
+				"EditorConfig.EditorConfig",
+				"ms-python.python"
+			]
+		}
+	}
+}

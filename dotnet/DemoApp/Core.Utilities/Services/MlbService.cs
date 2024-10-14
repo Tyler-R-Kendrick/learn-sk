@@ -10,7 +10,7 @@ public class MlbService
 
     public MlbService(HttpClient httpClient)
     {
-        httpClient.BaseAddress = new Uri("http://statsapi.mlb.com/api/v1/");
+        httpClient.BaseAddress = new("http://statsapi.mlb.com/api/v1/");
         _httpClient = httpClient;
     }
     public Task<Schedule> GetTeamSchedule(int teamId, DateTime startDate, DateTime endDate)

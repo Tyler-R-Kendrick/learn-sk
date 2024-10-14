@@ -6,57 +6,87 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel.ChatCompletion;
 
-var kernelBuilder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+// Load configuration.
+var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
+// Add the filters to the kernel.
+builder.Services
+    .AddSingleton<IFunctionInvocationFilter, FunctionInvocationLoggingFilter>()
+    .AddSingleton<CensorService>(_ => new("Bartman", "Billy Goat Tavern", "William Sianis", "Sox"))
+    .AddSingleton<IPromptRenderFilter, CensoredPromptRenderFilter>()
+    .AddSingleton(_ =>
+    {
+        // Add a logger to the Kernel's dependency injection provider, so the function filters can use it.
+        using var loggerFactory = LoggerFactory.Create(builder =>
+        builder
+            .AddFilter("FunctionInvocationLoggingFilter", LogLevel.Trace)
+            .AddConsole()
+        );
+        return loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
+    });
+var kernel = builder.Build();
 
-// Add the MLB Baseball Data Plugin to the kernel.
+// build the mlb service and plugin
 HttpClient httpClient = new();
 MlbService mlbService = new(httpClient);
 MlbBaseballDataPlugin mlbBaseballPlugin = new(mlbService);
 
-kernelBuilder.Plugins.AddFromObject(mlbBaseballPlugin);
+//Register the plugin
+kernel.Plugins.AddFromObject(mlbBaseballPlugin);
 
-// Add a logger to the Kernel's dependency injection provider, so the function filters can use it.
-using var loggerFactory = LoggerFactory.Create(builder =>
-  builder
-    .AddFilter("FunctionInvocationLoggingFilter", LogLevel.Trace)
-    .AddConsole()
-  );
-var logger = loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
+// Uses the OpenAI chat completions API.
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+// Insert a system prompt as instructions into the history.
+ChatHistory chatHistory = [];
 
-kernelBuilder.Services.AddSingleton(_ => logger);
-
-// Add the filters to the kernel.
-kernelBuilder.Services.AddSingleton<IFunctionInvocationFilter, FunctionInvocationLoggingFilter>();
-kernelBuilder.Services.AddSingleton<CensorService>(_ => new("Bartman", "Billy Goat Tavern", "William Sianis", "Sox"));
-kernelBuilder.Services.AddSingleton<IPromptRenderFilter, CensoredPromptRenderFilter>();
-
-var kernel = kernelBuilder.Build();
-
-// Execute the app logic with auto function invocation.
-OpenAIPromptExecutionSettings executionSettings = new()
-{
-    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
-    ChatSystemPrompt = @"
-        You are a sports announcer.
-        Summarize the game play-by-play as if you were the famous Cubs announcer Harry Caray.
-        When describing win or loss conditions, mention the lore/superstition that may be associated with the result."
-};
-
-KernelArguments kernelArgs = new(executionSettings);
-
-const string terminationPhrase = "quit";
+// Execute program.
+string[] terminationPhrases = ["quit", "exit"];
 string? userInput;
 do
 {
+    // Get user input.
+    Console.WriteLine("Type 'quit' or 'exit' to terminate the program.");
     Console.Write("User > ");
-    userInput = Console.ReadLine();
+    userInput = Console.ReadLine()
+        ?.Trim().ToLowerInvariant();
 
-    if (userInput != null && userInput != terminationPhrase)
+    // Validate user input.
+    while(string.IsNullOrWhiteSpace(userInput))
+    {
+        Console.WriteLine("Please type in something for the llm to respond to.");
+        Console.Write("User > ");
+        userInput = Console.ReadLine()
+            ?.Trim().ToLowerInvariant();
+    }
+
+    //Adding the user prompt to chat history
+    chatHistory.AddUserMessage(userInput);
+
+    // Process assist responses.
+    if (!terminationPhrases.Contains(userInput))
     {
         Console.Write("Assistant > ");
-        var response = await kernel.InvokePromptAsync(userInput, kernelArgs);
-        Console.WriteLine(response);
+
+        string fullMessage = "";
+        // Create instructions for the llm to adhere to.
+
+        OpenAIPromptExecutionSettings settings = new()
+        {
+            ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+            ChatSystemPrompt = @"
+                You are a sports announcer.
+                Summarize the game play-by-play as if you were the famous Cubs announcer Harry Caray.
+                When describing win or loss conditions, mention the lore/superstition that may be associated with the result."
+        };
+        await foreach (var chatUpdate in chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory, settings))
+        {
+            Console.Write(chatUpdate.Content);
+            fullMessage += chatUpdate.Content ?? "";
+        }
+
+        chatHistory.AddAssistantMessage(fullMessage);
+        Console.WriteLine();
     }
 }
-while (userInput != terminationPhrase);
+while (!terminationPhrases.Contains(userInput));

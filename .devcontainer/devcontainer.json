@@ -6,8 +6,23 @@
 				"ms-dotnettools.csdevkit",
 				"ms-dotnettools.dotnet-interactive-vscode",
 				"EditorConfig.EditorConfig",
-				"ms-python.python"
+				"ms-python.python",
+				"GitHub.copilot"
 			]
+		}
+	},
+	"secrets": {
+		"APPLICATIONSETTINGS__OPENAI__MODELNAME": {
+			"description": "The name of the OpenAI model used by Azure.",
+			"documentationUrl": "https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-csharp#retrieve-key-and-endpoint"
+		},
+		"APPLICATIONSETTINGS__OPENAI__KEY": {
+			"description": "The name of the OpenAI key used by Azure.",
+			"documentationUrl": "https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-csharp#retrieve-key-and-endpoint"
+		},
+		"APPLICATIONSETTINGS__OPENAI__ENDPOINT": {
+			"description": "The name of the OpenAI endpoint used by Azure.",
+			"documentationUrl": "https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-csharp#retrieve-key-and-endpoint"
 		}
 	}
 }

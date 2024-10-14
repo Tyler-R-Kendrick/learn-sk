@@ -10,18 +10,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 
 // Load configuration.
 var builder = KernelBuilderProvider.CreateKernelWithChatCompletion();
-var kernel = builder.Build();
-
-// build the mlb service and plugin
-HttpClient httpClient = new();
-MlbService mlbService = new(httpClient);
-MlbBaseballDataPlugin mlbBaseballPlugin = new(mlbService);
-
-//Register the plugin
-kernel.Plugins.AddFromObject(mlbBaseballPlugin);
-
 // Add the filters to the kernel.
-
 builder.Services
     .AddSingleton<IFunctionInvocationFilter, FunctionInvocationLoggingFilter>()
     .AddSingleton<CensorService>(_ => new("Bartman", "Billy Goat Tavern", "William Sianis", "Sox"))
@@ -36,6 +25,15 @@ builder.Services
         );
         return loggerFactory.CreateLogger("FunctionInvocationLoggingFilter");
     });
+var kernel = builder.Build();
+
+// build the mlb service and plugin
+HttpClient httpClient = new();
+MlbService mlbService = new(httpClient);
+MlbBaseballDataPlugin mlbBaseballPlugin = new(mlbService);
+
+//Register the plugin
+kernel.Plugins.AddFromObject(mlbBaseballPlugin);
 
 // Uses the OpenAI chat completions API.
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();

@@ -1,0 +1,10 @@
+<Project Sdk="MSTest.Sdk/3.3.1">
+    <PropertyGroup>
+        <IsTestProject>true</IsTestProject>
+        <EnableMSTestRunner>true</EnableMSTestRunner>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="../src/CustomConnector.csproj" />
+        <!-- <PackageReference Include="Microsoft.SemanticKernel.Connectors.InMemory" /> -->
+    </ItemGroup>
+</Project>

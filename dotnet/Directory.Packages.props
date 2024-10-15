@@ -8,5 +8,6 @@
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Microsoft.SemanticKernel" Version="1.19.0" />
     <PackageVersion Include="Microsoft.SemanticKernel.Agents.Core" Version="1.19.0-alpha" />
+    <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
 </Project>

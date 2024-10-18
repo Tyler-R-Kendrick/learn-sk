@@ -1,4 +1,10 @@
+* Use concepts like 12 factor app
+* microservices best patterns and practices (bounded contexts, domain decomposition, etc)
+* Solid principle
+* Favor best patterns and practices for reactive architectures (actor model, process isolation, etc.)
+
 # Scalable LLM Apps
+In this session, we will explore different techniques to create scalable LLM-based apps using semantic kernel.
 
 ## Constrained Decoding
     * logit biasing
@@ -39,7 +45,7 @@
 
 ## Responsible AI?
     * prompt filters
-    * 
+    *
 
 ## Fine-tuning
     * rlhf through prompt quality ratings in UX.

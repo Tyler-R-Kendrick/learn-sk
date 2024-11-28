@@ -28,12 +28,19 @@ public class VectorStoreImplementationTests : TestBase
     public void VectorStoreRetrievesCollectionNames()
     {
         // Arrange
+        Dictionary<string, TestVectorRecord> collection = new()
+        {
+            { "testCollection1", new("testKey1", "testValue1", new float[1536]) },
+            { "testCollection2", new("testKey2", "testValue2", new float[1536]) },
+            { "testCollection3", new("testKey3", "testValue3", new float[1536]) }
+        };
+        Configure(_ => collection);
         var vectorStore = VectorStore;
 
         // Act
-        var collection = vectorStore.ListCollectionNamesAsync();
+        var names = vectorStore.ListCollectionNamesAsync();
 
         // Assert
-        Assert.IsNotNull(collection);
+        Assert.IsNotNull(names);
     }
 }

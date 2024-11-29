@@ -4,8 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 Team[] teams = [
-    new(1, "Name", "Team Name"),
-    new(2, "Name", "Team Name")
+    new(1, "Name", "Team Code", "Abbr", "Team Name"),
+    new(2, "Name", "Team Code", "Abbr", "Team Name")
 ];
 
 app.MapGet("/game/{gameId}/playByPlay", (int gameId) => new MlbTeams(teams));
@@ -19,15 +19,13 @@ app.MapGet("/schedule", (ScheduleRequest request) => new Schedule([
                 new(
                     new(1,
                         "Name",
-                        "Team Name",
-                        "Abbr"
+                        "Team Name"
                     )
                 ),
                 new(
                     new(2,
                         "Name",
-                        "Team Name",
-                        "Abbr"
+                        "Team Name"
                     )
                 )
             )

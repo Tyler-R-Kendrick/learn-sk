@@ -1,0 +1,35 @@
+@import 'default';
+
+.msft-logo, header {
+    background-image: url(../imgs/microsoft-logo.svg) !important;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 100% 100px;
+}
+
+/* Layout for sticky header/footer and scrollable main content */
+:root, section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+    flex: auto;
+    flex-direction: column;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: inherit;
+    color: inherit;
+    height: 100px;
+    width: 100%;
+}
+
+.title-slide {
+    background-color: #243A5E !important;
+    color: #fff !important;
+}
+
+.title-slide h1 {
+    color: #62ADB9 !important;
+}

@@ -1,0 +1,28 @@
+{
+    "slidev.include": [
+        "**/slides.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/04_Memory.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/08_Text_Search.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/07_Process_Framework.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/06_SK_Agent_Framework.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/05_Middleware.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/03_Tools_and_Function_Invocation.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/02_Evaluations_and_Tests.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/01_Prompts_and_Prompt_Execution.md",
+        "dotnet/Workshops/IntroToSK/02_AI_Frameworks/00_Introduction_to_AI_Development.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/03_Anatomy_of_an_Effective_Prompt.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/02_Types_of_Prompts.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04.2_Prompt_Engineering_Techniques.Reasoning_Techniques.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04.1_Prompt_Engineering_Techniques.Basic_Techniques.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/01_Introduction_to_Prompt_Engineering.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04.5_Prompt_Engineering_Techniques.Constrained_Decoding.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04.4_Prompt_Engineering_Techniques.Parameter_Tuning.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04.3_Prompt_Engineering_Techniques.RAG.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/09_Resources_for_Further_Learning.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/08_Safety_Ethics_and_Fallback_Responses.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/07_Testing_and_Evaluation_Strategies.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/06_Best_Practices_for_Effective_Prompts.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/05_Practical_Use_Cases_and_Examples.md",
+        "dotnet/Workshops/IntroToSK/01_Prompt_Engineering/04_Prompt_Engineering_Techniques.md"
+    ]
+}

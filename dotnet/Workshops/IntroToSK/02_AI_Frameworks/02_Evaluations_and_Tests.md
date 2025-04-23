@@ -62,7 +62,7 @@ Follow the instructions for the [LLM-Eval](https://learn.microsoft.com/en-us/dot
 
 ### Hands‑On Exercise
 - Integrate Evaluations SDK into .NET test projects.
-- Write tests for existing prompt exeecution. 
+- Write tests for existing prompt execution. 
 - Execute batch evaluations and collect results.
 
 ---

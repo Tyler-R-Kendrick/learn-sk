@@ -1,17 +1,13 @@
 ---
 doc-type: lab
 marp: true
-theme: default
+theme: gaia
 paginate: true
 
 header: Introduction to Prompt Engineering
 footer: "© Microsoft Corporation. All rights reserved."
 style: |
   @import '../styles/msft.css';
-
-  section {
-    overflow-y: scroll;
-  }
 
 ---
 

@@ -10,16 +10,12 @@ tags:
 duration: "15min"
 
 marp: true
-theme: default
+theme: gaia
 paginate: true
 header: AI Frameworks - Introduction to AI Development
 footer: "© Microsoft Corporation. All rights reserved."
 style: |
   @import '../styles/msft.css';
-
-  section {
-    overflow-y: scroll;
-  }
 
 ---
 

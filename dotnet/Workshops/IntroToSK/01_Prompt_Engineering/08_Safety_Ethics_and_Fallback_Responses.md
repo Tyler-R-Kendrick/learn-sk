@@ -6,17 +6,21 @@ tags:
   - prompts
 duration: "20min"
 marp: true
-theme: default
+theme: gaia
+size: 16:9
 paginate: true
+transition: fade
 doc-type: content
 
 header: Introduction to Prompt Engineering
 footer: "© Microsoft Corporation. All rights reserved."
 style: |
   @import '../styles/msft.css';
-
+  
+  /* Make slides scrollable if content overflows */
   section {
-    overflow-y: scroll;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
 ---

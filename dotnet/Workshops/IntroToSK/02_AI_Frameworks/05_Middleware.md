@@ -46,6 +46,9 @@ Middleware components allow cross-cutting features such as logging, monitoring, 
 ---
 
 ## Key Concepts
+- Observability
+- SK Filters
+
 
 ---
 

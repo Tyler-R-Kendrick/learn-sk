@@ -45,6 +45,10 @@ Covers how to persist and retrieve context in AI applications using in‑process
 ---
 
 ## Key Concepts
+- Chat History
+- SK Vector Memory
+- Microsoft.Extensions.VectorData
+
 
 ---
 

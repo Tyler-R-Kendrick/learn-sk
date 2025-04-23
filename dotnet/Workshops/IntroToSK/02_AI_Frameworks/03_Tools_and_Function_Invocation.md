@@ -7,17 +7,13 @@ tags:
   - functions
 duration: "20min"
 marp: true
-theme: default
+theme: gaia
 paginate: true
 
 header: Introduction to Prompt Engineering
 footer: "© Microsoft Corporation. All rights reserved."
 style: |
   @import '../styles/msft.css';
-
-  section {
-    overflow-y: scroll;
-  }
 
 
 ---
@@ -44,6 +40,9 @@ Covers how to extend LLM applications by integrating external tools and function
 ---
 
 ## Key Concepts
+
+- Tools / Functions
+- Plugins
 
 ---
 

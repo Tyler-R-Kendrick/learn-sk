@@ -8,18 +8,14 @@ tags:
   - sdk
 
 marp: true
-theme: default
+theme: gaia
+size: 16:9
 paginate: true
-layout: title
 
 header: Introduction to Prompt Engineering
 footer: "© Microsoft Corporation. All rights reserved."
 style: |
   @import '../styles/msft.css';
-
-  section {
-    overflow-y: scroll;
-  }
 
 ---
 
